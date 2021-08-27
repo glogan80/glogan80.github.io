@@ -185,11 +185,11 @@ if(stringOne.length > stringTwo.length) {
 function sortAscending(stringOne, stringTwo) {
     // YOUR CODE BELOW HERE //
 
-if (stringOne < stringTwo) {
+    if(stringOne > stringTwo){
         return 1;
-    } else if (stringOne > stringTwo) {
+    }else if(stringOne < stringTwo){
         return -1;
-    } else {
+    }else if(stringOne === stringTwo){
         return 0;
     }
 
@@ -207,14 +207,13 @@ if (stringOne < stringTwo) {
 function sortDescending(stringOne, stringTwo) {
     // YOUR CODE BELOW HERE //
 
-if (stringOne > stringTwo) {
-        return 1;
-    } else if (stringOne < stringTwo) {
+    if(stringOne > stringTwo){
         return -1;
-    } else {
+    }else if(stringOne < stringTwo){
+        return 1;
+    }else if(stringOne === stringTwo){
         return 0;
     }
-
 
     // YOUR CODE ABOVE HERE //
 }
