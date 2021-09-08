@@ -11,14 +11,10 @@
 //////////////////////////////////////////////////////////////////////
 // Step 1 - Object Creation //////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
-var animal = {}; 
-
-animal.species = "homosapien"
-
-animal['name'] = "Sam";
-
-animal.noises = []; 
-
+var animal = {};
+animal.species = 'cat';
+animal['name'] = 'Minor';
+animal.noises = [];
 console.log(animal);
 
 //////////////////////////////////////////////////////////////////////
@@ -26,21 +22,20 @@ console.log(animal);
 //////////////////////////////////////////////////////////////////////
 
 var noises = [];
-noises[0] = "Uhh";
-noises.push("Achoo");
-noises.unshift("Ow");
-noises.push("brrrr");
-noises[noises.length] = "Burp";
+noises[0] = "meow";
+noises.push("hiss");
+noises.unshift("groan");
+noises[noises.length] = "cry";
 console.log(noises.length);
-console.log(noises[noises.length -1]);
+console.log(noises[noises.length - 1]);
 console.log(noises);
 
 //////////////////////////////////////////////////////////////////////
 // Step 3 - Combining Step 1 and 2 ///////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-animal["noises"] = noises;
-animal.push("Yawn");
+animal['noises'] = noises;
+animal['noises'].push('yell');
 console.log(animal);
 
 /* *******************************************************************
@@ -67,8 +62,6 @@ console.log(animal);
 //////////////////////////////////////////////////////////////////////
 
 var animals = [];
-
-var animals = [];
 animals.push(animal);
 console.log(animals);
 
@@ -81,19 +74,19 @@ noises: ['quack', 'honk', 'sneeze', 'woosh']
 animals.push(duck);
 console.log(animals);
 
-var lizard = {
-    species: 'lizard',
-    name: 'Larry',
-    noises: ['hissing', 'burping']
+var cow = {
+    species: 'cow',
+    name: 'Cindy',
+    noises: ['mooing', 'burping']
 };
 
-var hamster = {
-    species: 'hamster',
-    name: 'Bria',
-    noises: ['chittering', 'squeaking']
+var snake = {
+    species: 'snake',
+    name: 'Sue',
+    noises: ['slithering', 'hissing']
 };
 
-animals.push(lizard, hamster);
+animals.push(cow, snake);
 console.log(animals);
 console.log(animals.length);
 
@@ -101,7 +94,15 @@ console.log(animals.length);
 // Step 7 - Making Friends ///////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
+var friends = []; /* Here I'm chose to use an array for the list of friends because it's a simple list where order doesn't matter.*/
 
+function getRandom(animals) {
+    return animals[Math.floor(Math.random() * animals.length - 1 | 0)];
+}
+friends.push(getRandom(animals).name);
+ console.log(friends);
+ 
+ cow["friends"] = friends;
 
 /**
  * Nice work! You're done Part 1. Pat yourself on the back and

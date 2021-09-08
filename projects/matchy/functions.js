@@ -13,27 +13,55 @@
 // Step 1 - Search ///////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-function search(array, string) {
-    
+function search(animals, string) {
+    for(var i = 0; i < animals.length; i++){
+        if(animals[i].name === string){
+            return animals[i];
+        }
+    }
+    return null;
 }
 
 //////////////////////////////////////////////////////////////////////
 // Step 2 - Replace //////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-
+function replace(animals, name, replacement) {
+    for(var i = 0; i < animals.length; i++){
+        if(animals[i].name === name){
+            return animals[i] = replacement;
+        }
+    }
+    return animals[i];
+}
 
 //////////////////////////////////////////////////////////////////////
 // Step 3 - Remove ///////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-
+function remove(animals, name){
+     for(var i = 0; i < animals.length; i++){
+         if(animals[i].name === name){
+             return animals.splice(i, 1);
+         }
+     }
+}
 
 //////////////////////////////////////////////////////////////////////
 // Step 4 - Add ///////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-
+function add(animals, animal) { 
+    for(var i = 0; i < animals.length; i++){
+        if(animals[i].name === animal.name){
+            return "This animal already exists";
+         } else if(animal.name.length > 0 && animal.species.length > 0){
+           animals.push(animal);
+        } 
+        
+} 
+    
+}
 
 /**
  * You did it! You're all done with Matchy!
