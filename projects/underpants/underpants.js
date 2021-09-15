@@ -266,6 +266,21 @@ _.filter = function(array, funct){
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
 
+//creating a function that takes in two parameters an array and a function
+// using a for loop to loop through the array and call the function on each element, index and array 
+// return a new array of elements that return false from the function
+//Creates a new array literal to store the functions outputs
+
+_.reject = function(array, func){
+    var newArr = [];
+    
+    for(var i = 0; i < array.length; i++){
+        if(func(array[i], i, array) === false){
+            newArr.push(array[i])
+        }
+    } return newArr;
+}
+
 
 /** _.partition
 * Arguments:
@@ -286,6 +301,30 @@ _.filter = function(array, funct){
 }
 */
 
+//Creating a function that takes in an array and a function
+//creating two emprty arrays to store the nested array falsy values
+//creating a for loop to loop through the arrays
+//using an if and else conditionaal statement to test for true and falsy values
+//assigning truthy values to an arry
+//assigning the falsy values to another array 
+
+_.partition = function (array, func){
+    var arr1 = [[],[]];
+  
+    
+    for(var i = 0; i < array.length; i++){
+        if(func(array[i], i, array) === true){
+           arr1[0].push(array[i]);
+        } else if(func(array[i], i, array) === false){
+           arr1[1].push(array[i]);
+            //arr1.push(arr2);
+        }
+    } 
+    
+    return arr1;
+    
+}
+
 
 /** _.map
 * Arguments:
@@ -303,6 +342,30 @@ _.filter = function(array, funct){
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
 
+//Creating a function that takes in a collection and a function
+//create two array literals to store the output of the function calls
+//test wether the given collection is an array or an object using a conditional statement 
+//using array.isarray and typeof for object
+//using a for loop and for in loop to loop over the array and the object to access its values 
+
+_.map = function(collection, func){
+    var arr = [];
+    var obj = [];
+    
+    if(Array.isArray(collection) === true){
+        for(var i = 0; i < collection.length; i++){
+            arr.push(func(collection[i], i, collection))
+            
+        } return arr;
+    }else if(typeof collection === "object"){
+            for(var key in collection){
+                obj.push(func(collection[key], key, collection))
+                
+            }return obj;
+        }
+    
+}
+
 
 /** _.pluck
 * Arguments:
@@ -314,6 +377,19 @@ _.filter = function(array, funct){
 * Examples:
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
+
+//the function created will take in an array of objects and a property 
+//returning an array with the values of the given property for every element in the array 
+//we dont have to loop through the array, we have to access the given property and its values
+//must use .map to implement the functipon
+
+_.pluck = function(array, property) {
+    let result = _.map(array, function(value, i, collection) {
+        return value[property];
+    })
+    return result;
+}
+
 
 
 /** _.every
@@ -337,6 +413,43 @@ _.filter = function(array, funct){
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
 
+//a function that takes in a collection and a function
+//use the each function to go through the given collection
+//return true if the function results to true 
+//creating a variable 
+//test if theres not a function 
+//assign a vvariable to true and return that variable
+// using an if staement to test if there is a function given
+//if there is no function use the each function to test each values test for false values
+//use an else statement to test for other conditions if there is a function
+////use each to test the elements in the collection 
+//use an if statement to test if the value of the function results to false 
+//if one elmenet results to false then return false
+//if all elements are true in both cases then true would be returned 
+
+
+_.every = function(collection, func){
+    
+     var result = true;
+     
+    if (!func) {
+        _.each(collection, function(value, i, collection) {
+            if (value === false) {
+             result = false;
+        } 
+        })
+     } else {
+         _.each(collection, function(value, i, collection) {
+             if (func(value, i, collection) === false) {
+                 result = false;
+             }
+         })
+      }
+ return result;
+    
+    
+}
+
 
 /** _.some
 * Arguments:
@@ -359,6 +472,35 @@ _.filter = function(array, funct){
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
 
+//Creating a function that takes in a collection and a function
+// using the every function to loop through the collection
+//the every operator will test every item in the collection wether its an array or object 
+//using an if else conditional to test it there is or is not a given funtion
+//creating a varibale names result to store the false boolean value 
+//reassigning the result variable in side of the conditional when at least one of the conditions test to be true 
+
+
+_.some = function(collection, func){
+    let result = false;
+    if(!func){
+        _.every(collection, function(value, i, collection){
+        if(value === true){
+            result = true;
+            return result;
+        }
+    })
+    } else { _.every(collection, function(value, i, collection){
+        if(func(value, i, collection) === true){
+            result = true
+            return result;
+        }
+    })
+        
+    }
+    return result 
+}
+
+
 
 /** _.reduce
 * Arguments:
@@ -379,6 +521,28 @@ _.filter = function(array, funct){
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
 
+//check if seed exists/ not undefined
+ _.reduce = function(array, func, seed){
+    if(seed !== undefined) {
+       //if it does, then loop through array
+       for(var i = 0; i < array.length; i++) {
+           //reassign seed to be value of function call 
+          //call the func function on seed, value, index
+          seed = func(seed, array[i], i)
+       }
+       //return seed
+       return seed;
+    } else {
+        //if no seed given, first value in array is the seed
+        seed = array[0];
+        //if it does, then loop through array
+        for (var i = 1; i < array.length; i++) {
+          //reassign seed to be value of function call 
+          //call the func function on seed, value, index
+          seed = func(seed, array[i], i);
+        }
+        return seed;
+    }}
 
 /** _.extend
 * Arguments:
@@ -394,6 +558,21 @@ _.filter = function(array, funct){
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
+
+//creating a function that takes in two objects and possibly more
+//using the spread operator to account for more object parameters
+//copying all properties from the given object and [assing them to object1
+//Returning object1 updated 
+//creating a new variable to store the updated object and then returning it 
+//using the object.assign method to assign all of the other object properties to object 1
+
+
+
+_.extend = function(object1, ...object2) {
+    var newObject = Object.assign(object1, ...object2)
+    return newObject;
+}
+
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
