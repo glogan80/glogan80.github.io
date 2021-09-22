@@ -2,7 +2,13 @@
 // flatten /////////////////////////////////////////////////////////////////////
 // /////////////////////////////////////////////////////////////////////////////
 
-function flatten() {
+function flatten(arr) {
+  
+ return arr.reduce((combine, curr) => {
+   return combine.concat(curr)
+   
+  }, )
+  
 
 }
 
@@ -10,25 +16,84 @@ function flatten() {
 // loop ////////////////////////////////////////////////////////////////////////
 // /////////////////////////////////////////////////////////////////////////////
 
-function loop() {
-
+function loop(value, test, update, func) {
+      //test if true or false, stop if false
+      if(test(value)){
+        func(value);
+      } else {
+        return false
+     }
+     return loop(update(value), test, update, func)
+        
 }
 
 // /////////////////////////////////////////////////////////////////////////////
 // every ///////////////////////////////////////////////////////////////////////
 // /////////////////////////////////////////////////////////////////////////////
 
-function every() {
-
+function every(array, test) {
+  if(!array.length){
+    return true;
+  }
+ let result = false;
+  array.forEach(elem => test(elem) ? result = true : result = false )
+return result
 }
 
 // /////////////////////////////////////////////////////////////////////////////
 // dominantDirection ///////////////////////////////////////////////////////////
 // /////////////////////////////////////////////////////////////////////////////
 
-function dominantDirection() {
-
+function dominantDirection(text) {
+  function countBy(items, groupName) {
+  let counts = [];
+  for (let item of items) {
+    let name = groupName(item);
+    let known = counts.findIndex(c => c.name == name);
+    if (known == -1) {
+      counts.push({
+        name,
+        count: 1
+      });
+    } else {
+      counts[known].count++;
+    }
+  }
+  return counts;
 }
+  
+  function characterScript(code) {
+  for (let script of SCRIPTS) {
+    if (script.ranges.some(([from, to]) => {
+        return code >= from && code < to;
+      })) {
+      return script;
+    }
+  }
+  return null;
+}
+  let counted = countBy(text, char => {
+    let script = characterScript(char.codePointAt(0));
+    return script ? script.direction : "none";
+  }).filter(({name}) => name != "none");
+
+  if (counted.length == 0) return "ltr";
+
+  return counted.reduce((a, b) => a.count > b.count ? a : b).name;
+}
+// /////////////////////////////////////////////////////////////////////////////
+//  //////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+
+if ((typeof process !== 'undefined') &&
+  (typeof process.versions.node !== 'undefined')) {
+  module.exports = {
+    flatten,
+    loop,
+    every,
+    dominantDirection,
+  };
+};
 
 // /////////////////////////////////////////////////////////////////////////////
 //  //////////////////////////////////////////////////////

@@ -3,23 +3,54 @@
 // triangles ///////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function triangles() {
-
+function triangles(num) {
+   var string = "";
+            for (var i = 0; i < num; i++) {
+                console.log(string += "#");
+            }
 }
 ////////////////////////////////////////////////////////////////////////////////
 // fizzBuzz ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 function fizzBuzz() {
-  
+  for (var i = 1; i <= 15; i++) {
+        if (i % 15 === 0) {
+            console.log('fizzbuzz');
+        } else if (i % 5 === 0) {
+            console.log('buzz');
+        } else if (i % 3 === 0) {
+            console.log('fizz');
+        } else {
+            console.log(i);
+        }    
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // drawChessboard //////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function drawChessboard() {
-
+function drawChessboard(num) {
+//start with empty string and add to it as we iterate
+  let board = "";
+  //iterate through numbers
+  for(let i = 0; i < num; i++){
+    //create another loop for the next line
+    for(let y = 0; y < num; y++){
+      //if numbers iterations sum is even add a space
+      if((i + y) % 2 === 0){
+        board = board + " ";
+      }else{
+        //if not even add a #
+        board = board + "#"
+      }
+    }
+    //at the end of each loop, add a new line
+    board = board + "\n";
+  }
+  //print board outside of loops, inside of function
+  console.log(board);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
