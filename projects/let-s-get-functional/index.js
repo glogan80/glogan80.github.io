@@ -22,26 +22,144 @@ var _ = require('underbar');
  */
 
 var maleCount = function(array) {
-
+var males = _.filter(array, function(customerObj) {
+   if(customerObj.gender === "male") {
+       return true;
+   } else {
+       return false;
+   }
+});
+return males.length;
 };
 
-var femaleCount;
+var femaleCount = function(array) {
+var females = _.filter(array, function(customerObj) {
+   if(customerObj.gender === "female") {
+       return true;
+   } else {
+       return false;
+   }
+   
+});
+return females.length;
+};
 
-var oldestCustomer;
+var oldestCustomer = function(array) {
+    array.sort(function(a, b){
+    return a.age-b.age;
+});
+return array[array.length -1]['name'];
+};
 
-var youngestCustomer;
+var youngestCustomer = function(array) {
+    array.sort(function(a, b){
+    return a.age-b.age;
+});
+return array[0]['name'];
+};
 
-var averageBalance;
+var averageBalance = function(arr) {
+    var combinedBal = 0;
+    for(var i = 0; i < arr.length; i++) {
+      combinedBal += Number(arr[i].balance.replace(/[^0-9.-]+/g,""));
+    }
+    return combinedBal / arr.length;
+};
 
-var firstLetterCount;
+var firstLetterCount = function(array, letter) {
+var names = _.filter(array, function(customerObj) {
+   return customerObj.name[0].toUpperCase() === letter.toUpperCase();
+});
+return names.length;
+};
 
-var friendFirstLetterCount;
+var friendFirstLetterCount = function(array, person, char) {
+    //find {person} in the array and set their friends array to a variable
+    for (var i =0; i < array.length; i++) {
+        if (array[i].name === person) {
+            var friends = array[i].friends;
+        }
+    }
+    //loop through friends array and add 1 to result variable if name starts with {char}
+    //make sure names are all same case (upper/lower)
+    var result = 0;
+    for (var i =0; i < friends.length; i++) {
+        var name = friends[i].name;
+        name = name.charAt(0).toUpperCase();
+        char = char.toUpperCase();
+        if (name.startsWith(char) === true) {
+            result += 1;
+        }
+    } return result;
+};
 
-var friendsCount;
+var friendsCount = function(array, name) {
+    var result = [];
+    for (var i = 0; i < array.length; i++) {
+        var friends = array[i].friends;
+        for (var j = 0; j < friends.length; j++) {
+            if (friends[j].name === name) {
+                result.push(array[i].name);
+            }
+        }
+    }
+    return result;
+};
 
-var topThreeTags;
+var topThreeTags = function(array) {
+    //create one array with all tags of all customers
+    function push(array, newArray) {
+     for(var i = 0; i < array.length; i++) {
+            newArray.push(array[i]);
+     }
+      return newArray;
+}
+    var allTags = [];
+    for(var i = 0; i < array.length; i++) {
+     push(array[i].tags, allTags);
+    }
+    //create object that counts # of times each tag appears in allTags
+    var tagCount = {};
+    for(var i = 0; i < allTags.length; i++) {
+        var value = allTags[i];
+        if(tagCount[value]) {
+            tagCount[value]++;
+        }
+        else {
+            tagCount[value] = 1;
+        }
+    };
+    //create nested array of [[tag, value], [tag, value]]
+    var countArray = [];
+    for (var key in tagCount) {
+        countArray.push([key, tagCount[key]]);
+    };
+    //sort array by value
+    countArray.sort(function(a, b) {
+        return b[1] - a[1];
+    });
+    //make new array with first three tag names
+    var namesArray = [];
+    for(var i = 0; i < 3; i++) {
+        namesArray.push(countArray[i][0]);
+    }
+    //return array
+    return namesArray;
+};
 
-var genderCount;
+var genderCount = function(array) {
+  return _.reduce(array, function(resultObj, customerObj) {
+      //if resultObj has the key for the objects gender
+      //if so, add to that count
+      if(resultObj[customerObj.gender]) {
+          resultObj[customerObj.gender] += 1;
+       //if not, create new key/value pair for that gender
+        } else {
+        resultObj[customerObj.gender] = 1;
+        }
+     return resultObj;
+  }, {});
+};
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////

@@ -30,3 +30,27 @@ function fizzbuzz(){
 }
 
 console.log(fizzbuzz());
+
+//3. Switch Statement
+let expression = 'Townhouse';
+switch (expression) {
+  case 'Studio':
+    console.log('Studio has 1 room');
+    break;
+  case 'House':
+  case 'Townhouse':
+    console.log('House and Townhouse have 4 bedrooms');// ==> prints: "House and Townhouse have 4 bedrooms"
+    break;
+  default:
+    console.log("Sorry, we are out of the " +  expression + " options.");
+}
+ 
+//Only first true statement is executed
+let age3 = 27;
+if(age3 === 27){
+    console.log("this is the first true");
+}else if(age3 < 29){ // ==> even though this statment is true, the code will not run because conditonal statements stop at the first true statement
+    console.log("this is true two") ;
+}else{
+    console.log(false);
+}

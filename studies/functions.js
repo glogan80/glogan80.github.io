@@ -71,3 +71,12 @@
     newFunction('inner');
     
     // if you run console.log(outerVariable); here, it will print ReferenceError: outerVariable is not defined to the console
+    
+    //FUNCTION EXPRESSION
+    //Functions can be assigned to variables, these are called Function Expressions
+ let divide = function(num1, num2){
+     return num1 / num2;
+ };
+ 
+let dividend = divide(10, 2);
+console.log(dividend); // ==> prints: 5
